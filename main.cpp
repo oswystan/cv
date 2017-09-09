@@ -48,8 +48,24 @@ void show_png() {
     imshow("dst", dst);
 }
 
+void decode_jpg() {
+    int buf_size = 1024*1024;
+    std::string path = "1.jpg";
+    void* data = malloc(buf_size);
+    FILE* fp = fopen(path.c_str(), "r");
+    if (!fp) {
+        printf("ERROR: fail to open %s\n", path.c_str());
+        return;
+    }
+    int cnt = fread(data, 1, buf_size, fp);
+    cv::Mat jpg(1, cnt, CV_8UC1, data);
+    cv::Mat dec_jpg = cv::imdecode(jpg, CV_LOAD_IMAGE_COLOR);
+    imshow("dec jpg", dec_jpg);
+}
+
 int main(int argc, char* argv[]){
-    yuv2rgb();
+    //yuv2rgb();
+    decode_jpg();
 
     cv::waitKey(0);
     return 0;
