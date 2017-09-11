@@ -63,9 +63,17 @@ void decode_jpg() {
     imshow("dec jpg", dec_jpg);
 }
 
+void rect_overlap() {
+    cv::Rect r1(0, 0, 640, 480);
+    cv::Rect r2(10, 10, 640, 480);
+    cv::Rect r3 = r1 & r2;
+    printf("%d %d %d %d\n", r3.x, r3.y, r3.width, r3.height);
+}
+
 int main(int argc, char* argv[]){
     //yuv2rgb();
-    decode_jpg();
+    //decode_jpg();
+    rect_overlap();
 
     cv::waitKey(0);
     return 0;
